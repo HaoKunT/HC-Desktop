@@ -43,7 +43,7 @@ const filters = {
 }
 const defalutList = [
   { text: '前后端实现数据交互', done: false },
-  { text: '提供数据访问接口', done: false },
+  { text: '提供数据访问接口', done: true },
   { text: '搭建Django后台服务', done: true },
   { text: '打包App', done: true },
   { text: '打包Electron客户端', done: true },

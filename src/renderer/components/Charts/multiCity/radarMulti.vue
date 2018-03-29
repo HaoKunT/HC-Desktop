@@ -159,6 +159,7 @@ var option = {
     title: {
         text: '多城市AQI - 雷达图',
         left: 'center',
+        top: 15,
         textStyle: {
             color: '#eee'
         }

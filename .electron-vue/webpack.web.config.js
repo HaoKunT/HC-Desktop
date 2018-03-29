@@ -10,6 +10,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 let webConfig = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
@@ -48,6 +52,16 @@ let webConfig = {
         }
       },
       {
+        test: /\.svg$/,
+        use: {
+          loader: 'svg-sprite-loader',
+          options: {
+            symbolId: 'icon-[name]'
+          }
+        },
+        include: [resolve('src/renderer/icons')],
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: {
           loader: 'url-loader',
@@ -55,7 +69,8 @@ let webConfig = {
             limit: 10000,
             name: 'imgs/[name].[ext]'
           }
-        }
+        },
+        exclude: [resolve('src/renderer/icons')]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -70,6 +85,9 @@ let webConfig = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': require('../config/dev.env')
+    }),
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',

@@ -387,12 +387,28 @@ var geoCoordMap = {
 
 var convertData = function (data) {
     var res = [];
+    var idIndex = 1
     for (var i = 0; i < data.length; i++) {
         var geoCoord = geoCoordMap[data[i].name];
         if (geoCoord) {
             res.push({
+                id: idIndex++,
+                date: {
+                    year: 2017,
+                    month: 3,
+                    day: 1
+                },
+                position: geoCoord,
                 name: data[i].name,
-                value: geoCoord.concat(data[i].value)
+                value: [
+                    data[i].value,
+                    data[i].value,
+                    data[i].value,
+                    data[i].value,
+                    data[i].value,
+                    data[i].value
+                ],
+                level: "轻度污染"
             });
         }
     }

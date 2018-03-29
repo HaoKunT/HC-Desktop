@@ -170,7 +170,7 @@ var itemStyle = {
 
 var option = {
     title: {
-        top: 30,
+        top: 20,
         text: '多城市一个月每天的AQI及各污染物指数图',
         left: 'center',
         textStyle: {
