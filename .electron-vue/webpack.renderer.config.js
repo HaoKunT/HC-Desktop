@@ -234,4 +234,9 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
+if (config.build.bundleAnalyzerReport) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  rendererConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
 module.exports = rendererConfig
