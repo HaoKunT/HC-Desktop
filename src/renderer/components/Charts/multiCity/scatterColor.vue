@@ -321,6 +321,8 @@ export default {
             vm.chart.setOption(option, true);
           })
         );
+      else
+        vm.chart.clear()
     }
   }
 };

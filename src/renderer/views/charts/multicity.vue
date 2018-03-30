@@ -38,8 +38,8 @@
           v-model="dateSelectedValue"
           align="right"
           type="month"
-          editable = false
-          clearable = false
+          :editable="dateEditable"
+          :clearable="dateClearable"
           placeholder="选择时间"
           :disabled="isDatePickerDisable"/>
         </el-col>
@@ -92,7 +92,9 @@ export default {
       cityOptions: [],
       citySelectedValue: "",
       dateSelectedValue: new Date(2017, 3, 2),
-      citySelectedName: ""
+      citySelectedName: "",
+      dateEditable: false,
+      dateClearable: false
     };
   },
   mounted() {
