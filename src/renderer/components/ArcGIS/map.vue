@@ -2,8 +2,10 @@
   <div class="claro">
     <div id="viewDiv"></div>
     <div class="datepicker-wraper">
-      <el-date-picker style="margin-right: 0px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); border-radius: 4px;width: 8rem;"
+      <el-date-picker
+      class="datepicker"
       v-model="dateSelected"
+      v-loading.fullscreen.lock="fullscreenLoading"
       type="date"
       size="small"
       :clearable="datepickerClearable"
@@ -16,7 +18,6 @@
 
 <script>
 import * as esriLoader from 'esri-loader'
-// import testData from "./testdata";
 import { getDailyNationalData } from '@/api/data/main'
 
 export default {
@@ -26,7 +27,8 @@ export default {
       datepickerClearable: false,
       datepickerEditable: false,
       dateSelected: new Date(2017, 2, 1),
-      dateString: '2017-03-01'
+      dateString: '2017-03-01',
+      fullscreenLoading: false
     }
   },
   mounted () {
@@ -72,7 +74,6 @@ export default {
             Fullscreen,
             Graphic
           ]) => {
-            // then we load a web map from an id
             let webmap = new WebMap({
               portalItem: { id: 'cd2c08450eb24ffc912bf7d097c4db8d' }
             })
@@ -108,7 +109,6 @@ export default {
               view: this.mapView
             })
 
-            // Add the search widget to the top right corner of the view
             this.mapView.ui.add(searchWidget, {
               position: 'top-right'
             })
@@ -126,17 +126,20 @@ export default {
               })
               .catch(err => {
                 console.error(err)
+                this.fullscreenLoading = false
               })
           }
         )
         .catch(err => {
           console.error(err)
+          this.fullscreenLoading = false
         })
     },
     addPoints (data) {
       esriLoader
         .loadModules(['esri/Graphic', 'dojo/domReady!'])
         .then(([Graphic]) => {
+          this.fullscreenLoading = true
           var pointGraphics = []
           for (var i = 0; i < data.length; i++) {
             let color = [128, 0, 255, 0.3]
@@ -193,10 +196,6 @@ export default {
                 so2Value: so2Value
               },
               popupTemplate: {
-                // title: "{year}-{month}-{day}  {cityName}",
-                // content: "<ul><li>AQI: {value.aqiValue}</li>" +
-                //   "<li>PM2.5: {value.pm25Value}</li>" +
-                //   "<li>SO2: {value.so2Value}</li><ul>"
                 title:
                   "<font color='#008000'>&nbsp;&nbsp;{year}年{month}月{day}日&nbsp;&nbsp;&nbsp;{cityName}&nbsp;-&nbsp;空气污染情况",
                 content: [
@@ -242,14 +241,13 @@ export default {
 
             pointGraphics.push(pointGraphic)
           }
-
-          // Add the graphics to the view's graphics layer
           this.mapView.graphics = []
           this.mapView.graphics.addMany(pointGraphics)
+          this.fullscreenLoading = false
         })
         .catch(err => {
-          // handle any errors
           console.error(err)
+          this.fullscreenLoading = false
         })
     },
     reAddPoints (data) {
@@ -262,6 +260,7 @@ export default {
         })
         .catch(err => {
           console.error(err)
+          this.fullscreenLoading = false
         })
     }
   }
@@ -282,12 +281,15 @@ export default {
   display: -webkit-flex;
   align-items: center;
   justify-content: center;
-  // margin-right: 250px;
-  margin-top: 0px;
-  opacity: 0.6;
-  border-radius: 4px;
-  &:hover {
-    opacity: 0.85;
+  .datepicker {
+    margin-right: 0px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    width: 8rem;
+    opacity: 0.6;
+    &:hover {
+      opacity: 0.85;
+    }
   }
 }
 </style>
