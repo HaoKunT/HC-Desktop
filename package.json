@@ -1,9 +1,9 @@
 {
   "name": "hc-desktop",
-  "productName": "AQI数据可视化系统",
+  "productName": "空气质量数据可视化系统",
   "version": "1.0.0",
   "author": "lsq210 <1135595767@qq.com>",
-  "description": "AQI数据可视化系统",
+  "description": "空气质量数据可视化系统",
   "license": "Apache-2.0",
   "main": "./dist/electron/main.js",
   "scripts": {
