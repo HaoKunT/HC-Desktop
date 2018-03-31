@@ -21,7 +21,7 @@ export default {
     TagsView
   },
   computed: {
-    sidebar() {
+    sidebar () {
       return this.$store.state.app.sidebar
     }
   }

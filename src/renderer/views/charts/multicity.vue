@@ -2,7 +2,7 @@
   <div class="chart-container">
     <div class="select-wrapper">
       <el-row type="flex" justify="end">
-        <el-col :span="10" class="tag-wraper">
+        <el-col :span="11" class="tag-wraper">
           <el-tag style="margin-left: 4px;"
           v-for="tag in selectedCities"
           :key="tag.id"
@@ -83,7 +83,7 @@ import { Message } from 'element-ui'
 import { getCitiesInfo } from '@/api/data/main'
 
 export default {
-  name: 'lineChart',
+  name: 'multiCity',
   components: { scatterColor, parallel },
   data () {
     return {
@@ -170,11 +170,11 @@ export default {
 
 <style lang="scss" scoped>
 .chart-container {
-  padding: 32px;
+  padding: 20px 32px 25px 32px;
   background-color: rgb(240, 242, 245);
   .select-wrapper {
-    margin-bottom: 20px;
-    margin-right: 32px;
+    margin-bottom: 0px;
+    margin-right: 0px;
     width: 100%;
     .tag-wraper {
       display: flex;

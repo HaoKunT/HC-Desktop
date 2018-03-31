@@ -2,10 +2,12 @@
   <div class="claro">
     <div id="viewDiv"></div>
     <div class="datepicker-wraper">
-      <el-date-picker style="margin-right: 0px;"
+      <el-date-picker style="margin-right: 0px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); border-radius: 4px;width: 8rem;"
       v-model="dateSelected"
       type="date"
       size="small"
+      :clearable="datepickerClearable"
+      :editable="datepickerEditable"
       placeholder="选择日期">
       </el-date-picker>
     </div>
@@ -21,6 +23,8 @@ export default {
   data () {
     return {
       mapView: null,
+      datepickerClearable: false,
+      datepickerEditable: false,
       dateSelected: new Date(2017, 2, 1),
       dateString: '2017-03-01'
     }
@@ -263,7 +267,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
 @import url("https://js.arcgis.com/4.6/esri/css/main.css");
 @import url("https://js.arcgis.com/4.6/dijit/themes/claro/claro.css");
 #viewDiv {
@@ -278,5 +282,12 @@ export default {
   display: -webkit-flex;
   align-items: center;
   justify-content: center;
+  // margin-right: 250px;
+  margin-top: 0px;
+  opacity: 0.6;
+  border-radius: 4px;
+  &:hover {
+    opacity: 0.85;
+  }
 }
 </style>

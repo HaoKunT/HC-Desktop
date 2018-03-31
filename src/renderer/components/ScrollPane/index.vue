@@ -3,15 +3,15 @@
     <div class="scroll-wrapper" ref="scrollWrapper" :style="{left: left + 'px'}">
       <slot></slot>
     </div>
-    <!-- <div class="datepicker-wraper">
+    <div class="datepicker-wraper" :style="{display: datepickerWraperDispaly}">
       <el-date-picker style="margin-right: 0px;"
       v-model="dateSelected"
       type="date"
       size="small"
-      clearable = false
+      :clearable="datepickerClearable"
       placeholder="选择日期">
       </el-date-picker>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -22,7 +22,15 @@ export default {
   name: 'scrollPane',
   data () {
     return {
-      left: 0
+      left: 0,
+      datepickerClearable: false,
+      dateSelected: new Date(2017, 2, 1)
+    }
+  },
+  props: {
+    datepickerWraperDispaly: {
+      type: String,
+      default: 'none'
     }
   },
   methods: {
@@ -82,6 +90,13 @@ export default {
   width: 100%;
   .scroll-wrapper {
     position: absolute;
+  }
+  .datepicker-wraper {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 1px 15px;
   }
 }
 </style>

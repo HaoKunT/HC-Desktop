@@ -88,7 +88,7 @@ import rose from '@/components/Charts/singleCity/rose'
 import { getCitiesInfo } from '@/api/data/main'
 
 export default {
-  name: 'keyboardChart',
+  name: 'singleCity',
   data () {
     return {
       cityOptions: [],

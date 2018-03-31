@@ -31,7 +31,7 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false
 
-new Vue({
+new Vue({ // eslint-disable-line
   el: '#app',
   router,
   store,
