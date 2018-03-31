@@ -80,46 +80,44 @@
 </template>
 
 <script>
-/* eslint-disable */
-import mixChart from "@/components/Charts/singleCity/mixChart"
-import radar from "@/components/Charts/singleCity/radar"
-import calendar from "@/components/Charts/singleCity/calendar"
-import scatterColor2 from "@/components/Charts/singleCity/scatterColor2"
-import rose from "@/components/Charts/singleCity/rose"
-import { getCitiesInfo } from "@/api/data/main"
-import { getDataTimeSpan } from "@/api/data/main"
+import mixChart from '@/components/Charts/singleCity/mixChart'
+import radar from '@/components/Charts/singleCity/radar'
+import calendar from '@/components/Charts/singleCity/calendar'
+import scatterColor2 from '@/components/Charts/singleCity/scatterColor2'
+import rose from '@/components/Charts/singleCity/rose'
+import { getCitiesInfo } from '@/api/data/main'
 
 export default {
-  name: "keyboardChart",
-  data() {
+  name: 'keyboardChart',
+  data () {
     return {
       cityOptions: [],
       citySelectedValue: 299,
-      dateSelectedValue: new Date(2017,3,2),
-      citySelectedName: "武汉"
-    };
+      dateSelectedValue: new Date(2017, 3, 2),
+      citySelectedName: '武汉'
+    }
   },
-  mounted() {
+  mounted () {
     this.initCityData()
   },
   computed: {
-    isCitySelectDisable: function() {
-      return this.cityOptions.length > 0 ? false : true
+    isCitySelectDisable: function () {
+      return !(this.cityOptions.length > 0)
     },
-    isDatePickerDisable: function() {
-      return this.cityOptions.length > 0 ? false : true
+    isDatePickerDisable: function () {
+      return !(this.cityOptions.length > 0)
     },
-    yearSelected: function() {
+    yearSelected: function () {
       return this.dateSelectedValue ? this.dateSelectedValue.getFullYear() : 2017
     },
-    monthSelected: function() {
+    monthSelected: function () {
       return this.dateSelectedValue ? this.dateSelectedValue.getMonth() + 1 : 1
     }
   },
   watch: {
-    citySelectedValue: function() {
-      for(var i=0; i< this.cityOptions.length; i++) {
-        if(this.cityOptions[i].id == this.citySelectedValue) {
+    citySelectedValue: function () {
+      for (var i = 0; i < this.cityOptions.length; i++) {
+        if (this.cityOptions[i].id == this.citySelectedValue) { // eslint-disable-line
           this.citySelectedName = this.cityOptions[i].cityname
           break
         }
@@ -127,16 +125,16 @@ export default {
     }
   },
   methods: {
-    initCityData() {
+    initCityData () {
       getCitiesInfo({
-        format: "json"
+        format: 'json'
       }).then(response => {
         this.cityOptions = response.data
-      });
+      })
     }
   },
   components: { mixChart, radar, calendar, scatterColor2, rose }
-};
+}
 </script>
  
 <style lang="scss" scoped>

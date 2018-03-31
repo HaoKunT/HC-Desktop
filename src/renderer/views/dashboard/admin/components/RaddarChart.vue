@@ -3,10 +3,9 @@
 </template>
 
 <script>
-/* eslint-disable */
 import echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
 import { debounce } from '@/utils'
+require('echarts/theme/macarons') // echarts theme
 
 const animationDuration = 3000
 
@@ -25,12 +24,12 @@ export default {
       default: '445px'
     }
   },
-  data() {
+  data () {
     return {
       chart: null
     }
   },
-  mounted() {
+  mounted () {
     this.initChart()
     this.__resizeHanlder = debounce(() => {
       if (this.chart) {
@@ -39,7 +38,7 @@ export default {
     }, 100)
     window.addEventListener('resize', this.__resizeHanlder)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (!this.chart) {
       return
     }
@@ -48,17 +47,17 @@ export default {
     this.chart = null
   },
   methods: {
-    initChart() {
+    initChart () {
       this.chart = echarts.init(this.$el, 'macarons')
 
       this.chart.setOption({
         title: {
-            top: 0,
-            text: 'Capability',
-            left: 'center',
-            textStyle: {
-                color: '#000'
-            }
+          top: 0,
+          text: 'Capability',
+          left: 'center',
+          textStyle: {
+            color: '#000'
+          }
         },
         tooltip: {
           trigger: 'axis',

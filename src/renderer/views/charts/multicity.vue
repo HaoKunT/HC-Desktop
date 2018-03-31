@@ -73,100 +73,99 @@
 </template>
 
 <script>
-/* eslint-disable */
 // import Linec from "@/components/Charts/lineMarker";
-//import Key from "@/components/Charts/keyboard";
-import scatterColor from "@/components/Charts/multiCity/scatterColor";
+// import Key from "@/components/Charts/keyboard";
+import scatterColor from '@/components/Charts/multiCity/scatterColor'
 // import scatterTime from "@/components/Charts/multiCity/scatterTime";
-import parallel from "@/components/Charts/multiCity/parallel";
+import parallel from '@/components/Charts/multiCity/parallel'
 // import radarMulti from "@/components/Charts/multiCity/radarMulti";
-import { Message } from "element-ui";
-import { getCitiesInfo } from "@/api/data/main";
+import { Message } from 'element-ui'
+import { getCitiesInfo } from '@/api/data/main'
 
 export default {
-  name: "lineChart",
+  name: 'lineChart',
   components: { scatterColor, parallel },
-  data() {
+  data () {
     return {
       selectedCities: [],
       cityOptions: [],
-      citySelectedValue: "",
+      citySelectedValue: '',
       dateSelectedValue: new Date(2017, 3, 2),
-      citySelectedName: "",
+      citySelectedName: '',
       dateEditable: false,
       dateClearable: false
-    };
+    }
   },
-  mounted() {
-    this.initCityData();
+  mounted () {
+    this.initCityData()
   },
   computed: {
-    isCitySelectDisable: function() {
-      return this.cityOptions.length > 0 ? false : true;
+    isCitySelectDisable: function () {
+      return !(this.cityOptions.length > 0)
     },
-    isDatePickerDisable: function() {
-      return this.cityOptions.length > 0 ? false : true;
+    isDatePickerDisable: function () {
+      return !(this.cityOptions.length > 0)
     },
-    yearSelected: function() {
+    yearSelected: function () {
       return this.dateSelectedValue
         ? this.dateSelectedValue.getFullYear()
-        : 2017;
+        : 2017
     },
-    monthSelected: function() {
-      return this.dateSelectedValue ? this.dateSelectedValue.getMonth() + 1 : 1;
+    monthSelected: function () {
+      return this.dateSelectedValue ? this.dateSelectedValue.getMonth() + 1 : 1
     }
   },
   watch: {
-    citySelectedValue: function() {}
+    citySelectedValue: function () {}
   },
   methods: {
-    initCityData() {
+    initCityData () {
       getCitiesInfo({
-        format: "json"
+        format: 'json'
       }).then(response => {
-        this.cityOptions = response.data;
+        this.cityOptions = response.data
         // for (var i = 0; i < response.data.length; i++) {
         //   temp.push({
         //     key: response.data[i].id,
         //     label: response.data[i].cityname
         //   });
         // }
-      });
+      })
     },
-    handleTagClose(tag) {
-      this.selectedCities.splice(this.selectedCities.indexOf(tag), 1);
+    handleTagClose (tag) {
+      this.selectedCities.splice(this.selectedCities.indexOf(tag), 1)
     },
-    addCity(newValue) {
+    addCity (newValue) {
       if (this.selectedCities.length >= 3) {
         Message({
-          message: "已达选择上限",
-          type: "warning",
+          message: '已达选择上限',
+          type: 'warning',
           duration: 2 * 1000
-        });
-        return;
+        })
+        return
       }
 
       for (var i = 0; i < this.cityOptions.length; i++) {
-        if (this.cityOptions[i].id == newValue) {
-          var flag = false;
+        if (this.cityOptions[i].id == newValue) { // eslint-disable-line
+          var flag = false
           for (var j = 0; j < this.selectedCities.length; j++) {
-            if (this.selectedCities[j].id == newValue) {
+            if (this.selectedCities[j].id == newValue) { // eslint-disable-line
               Message({
-                message: "该城市已在标签中",
-                type: "warning",
+                message: '该城市已在标签中',
+                type: 'warning',
                 duration: 2 * 1000
-              });
-              flag = true;
-              return;
+              })
+              flag = true
+              return
             }
           }
-          if (!flag) this.selectedCities.push(this.cityOptions[i]);
-          break;
+          if (!flag) this.selectedCities.push(this.cityOptions[i])
+          break
         }
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

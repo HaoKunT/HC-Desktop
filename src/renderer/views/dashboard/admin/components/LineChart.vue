@@ -3,10 +3,9 @@
 </template>
 
 <script>
-/* eslint-disable */
 import echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
 import { debounce } from '@/utils'
+require('echarts/theme/macarons') // echarts theme
 
 export default {
   props: {
@@ -30,12 +29,12 @@ export default {
       type: Object
     }
   },
-  data() {
+  data () {
     return {
       chart: null
     }
   },
-  mounted() {
+  mounted () {
     this.initChart()
     if (this.autoResize) {
       this.__resizeHanlder = debounce(() => {
@@ -50,7 +49,7 @@ export default {
     const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
     sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (!this.chart) {
       return
     }
@@ -67,21 +66,21 @@ export default {
   watch: {
     chartData: {
       deep: true,
-      handler(val) {
+      handler (val) {
         this.setOptions(val)
       }
     }
   },
   methods: {
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions ({ expectedData, actualData } = {}) {
       this.chart.setOption({
         title: {
-            top: 0,
-            text: 'Contributions',
-            left: 'center',
-            textStyle: {
-                color: '#000'
-            }
+          top: 0,
+          text: 'Contributions',
+          left: 'center',
+          textStyle: {
+            color: '#000'
+          }
         },
         xAxis: {
           data: ['3月17日', '3月18日', '3月19日', '3月20日', '3月21日', '3月22日', '3月23日'],
@@ -115,7 +114,8 @@ export default {
           data: ['expected', 'actual']
         },
         series: [{
-          name: 'expected', itemStyle: {
+          name: 'expected',
+          itemStyle: {
             normal: {
               color: '#FF005A',
               lineStyle: {
@@ -152,7 +152,7 @@ export default {
         }]
       })
     },
-    initChart() {
+    initChart () {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
     }

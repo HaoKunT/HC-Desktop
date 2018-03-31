@@ -48,7 +48,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import CountTo from 'vue-count-to'
 
 export default {
@@ -56,7 +55,7 @@ export default {
     CountTo
   },
   methods: {
-    handleSetLineChartData(type) {
+    handleSetLineChartData (type) {
       this.$emit('handleSetLineChartData', type)
     }
   }

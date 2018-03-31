@@ -24,7 +24,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import GithubCorner from '@/components/GithubCorner'
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
@@ -67,13 +66,13 @@ export default {
     TodoList,
     BoxCard
   },
-  data() {
+  data () {
     return {
       lineChartData: lineChartData.GCCCCGContributions
     }
   },
   methods: {
-    handleSetLineChartData(type) {
+    handleSetLineChartData (type) {
       this.lineChartData = lineChartData[type]
     }
   }

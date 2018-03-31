@@ -14,36 +14,35 @@
 </template>
 
 <script>
-/* eslint-disable */
-import * as esriLoader from "esri-loader";
+import * as esriLoader from 'esri-loader'
 // import testData from "./testdata";
-import { getDailyNationalData } from "@/api/data/main";
+import { getDailyNationalData } from '@/api/data/main'
 
 export default {
-  data() {
+  data () {
     return {
       sceneView: null,
-      dateSelected: new Date(2017, 2 ,1),
+      dateSelected: new Date(2017, 2, 1),
       dateReadOnly: true
-    };
+    }
   },
-  mounted() {
-    this.initMap();
+  mounted () {
+    this.initMap()
   },
   methods: {
-    initMap() {
+    initMap () {
       esriLoader
         .loadModules([
-          "esri/views/SceneView",
-          "esri/Map",
-          "esri/Graphic",
-          "esri/layers/GraphicsLayer",
-          "esri/widgets/Search",
-          "esri/widgets/Locate",
-          "esri/widgets/Expand",
-          "esri/widgets/BasemapGallery",
-          "esri/widgets/Fullscreen",
-          "dojo/domReady!"
+          'esri/views/SceneView',
+          'esri/Map',
+          'esri/Graphic',
+          'esri/layers/GraphicsLayer',
+          'esri/widgets/Search',
+          'esri/widgets/Locate',
+          'esri/widgets/Expand',
+          'esri/widgets/BasemapGallery',
+          'esri/widgets/Fullscreen',
+          'dojo/domReady!'
         ])
         .then(
           ([
@@ -58,11 +57,11 @@ export default {
             Fullscreen
           ]) => {
             var map = new Map({
-              basemap: "streets"
-            });
+              basemap: 'streets'
+            })
 
             this.sceneView = new SceneView({
-              container: "viewDiv",
+              container: 'viewDiv',
               map: map,
               camera: {
                 position: {
@@ -77,83 +76,83 @@ export default {
                 dockEnabled: true,
                 dockOptions: {
                   buttonEnabled: true,
-                  position: "bottom-right",
+                  position: 'bottom-right',
                   breakpoint: false
                 }
               }
-            });
+            })
 
             var searchWidget = new Search({
               view: this.sceneView
-            });
+            })
             var locateBtn = new Locate({
               view: this.sceneView
-            });
+            })
             var basemapGallery = new BasemapGallery({
               view: this.sceneView,
-              container: document.createElement("div")
-            });
+              container: document.createElement('div')
+            })
             var bgExpand = new Expand({
               view: this.sceneView,
               content: basemapGallery.container,
-              expandIconClass: "esri-icon-basemap"
-            });
+              expandIconClass: 'esri-icon-basemap'
+            })
             var fullscreen = new Fullscreen({
               view: this.sceneView
-            });
+            })
 
             // Add the search widget to the top right corner of the view
             this.sceneView.ui.add(searchWidget, {
-              position: "top-right"
-            });
-            this.sceneView.ui.add(fullscreen, "top-right");
-            this.sceneView.ui.add(bgExpand, "top-right");
+              position: 'top-right'
+            })
+            this.sceneView.ui.add(fullscreen, 'top-right')
+            this.sceneView.ui.add(bgExpand, 'top-right')
             this.sceneView.ui.add(locateBtn, {
-              position: "top-left"
-            });
+              position: 'top-left'
+            })
 
             getDailyNationalData({
-              format: "json",
-              date: "2017-03-01"
+              format: 'json',
+              date: '2017-03-01'
             })
               .then(respose => {
-                var graphicsLayer = new GraphicsLayer();
-                map.add(graphicsLayer);
-                let data = respose.data;
+                var graphicsLayer = new GraphicsLayer()
+                map.add(graphicsLayer)
+                let data = respose.data
                 for (var i = 0; i < data.length; i++) {
-                  let color = [128, 0, 255, 0.3];
-                  let outlineWidth = 1;
-                  let outlineColor = [128, 0, 255, 0.75];
-                  let size = data[i].value[0] / 5;
-                  let lng = data[i].position[0];
-                  let lat = data[i].position[1];
-                  let cityId = data[i].id;
-                  let cityName = data[i].name;
-                  let year = data[i].date.year;
-                  let month = data[i].date.month;
-                  let day = data[i].date.day;
-                  let aqiValue = data[i].value[0];
-                  let pm25Value = data[i].value[1];
-                  let pm10Value = data[i].value[2];
-                  let coValue = data[i].value[3];
-                  let no2Value = data[i].value[4];
-                  let so2Value = data[i].value[5];
+                  let color = [128, 0, 255, 0.3]
+                  let outlineWidth = 1
+                  let outlineColor = [128, 0, 255, 0.75]
+                  let size = data[i].value[0] / 5
+                  let lng = data[i].position[0]
+                  let lat = data[i].position[1]
+                  let cityId = data[i].id
+                  let cityName = data[i].name
+                  let year = data[i].date.year
+                  let month = data[i].date.month
+                  let day = data[i].date.day
+                  let aqiValue = data[i].value[0]
+                  let pm25Value = data[i].value[1]
+                  let pm10Value = data[i].value[2]
+                  let coValue = data[i].value[3]
+                  let no2Value = data[i].value[4]
+                  let so2Value = data[i].value[5]
                   var point = {
-                    type: "point",
+                    type: 'point',
                     x: lng,
                     y: lat,
                     z: 0
-                  };
+                  }
 
                   var markerSymbol = {
-                    type: "simple-marker",
+                    type: 'simple-marker',
                     color: color,
                     size: size,
                     outline: {
                       color: outlineColor,
                       width: outlineWidth
                     }
-                  };
+                  }
 
                   let pointGraphic = new Graphic({
                     geometry: point,
@@ -176,59 +175,59 @@ export default {
                         "<font color='#008000'>&nbsp;&nbsp;{year}年{month}月{day}日&nbsp;&nbsp;&nbsp;{cityName}&nbsp;-&nbsp;空气污染情况",
                       content: [
                         {
-                          type: "fields",
+                          type: 'fields',
                           fieldInfos: [
                             {
-                              fieldName: "aqiValue",
+                              fieldName: 'aqiValue',
                               visible: true,
-                              label: "AQI"
+                              label: 'AQI'
                             },
                             {
-                              fieldName: "pm25Value",
+                              fieldName: 'pm25Value',
                               visible: true,
-                              label: "PM2.5"
+                              label: 'PM2.5'
                             },
                             {
-                              fieldName: "pm10Value",
+                              fieldName: 'pm10Value',
                               visible: true,
-                              label: "PM10"
+                              label: 'PM10'
                             },
                             {
-                              fieldName: "coValue",
+                              fieldName: 'coValue',
                               visible: true,
-                              label: "CO"
+                              label: 'CO'
                             },
                             {
-                              fieldName: "no2Value",
+                              fieldName: 'no2Value',
                               visible: true,
-                              label: "NO2"
+                              label: 'NO2'
                             },
                             {
-                              fieldName: "so2Value",
+                              fieldName: 'so2Value',
                               visible: true,
-                              label: "SO2"
+                              label: 'SO2'
                             }
                           ]
                         }
                       ]
                     },
-                    outFields: ["*"]
-                  });
-                  graphicsLayer.add(pointGraphic);
+                    outFields: ['*']
+                  })
+                  graphicsLayer.add(pointGraphic)
                 }
               })
               .catch(err => {
-                console.error(err);
-              });
+                console.error(err)
+              })
           }
         )
         .catch(err => {
           // handle any errors
-          console.error(err);
-        });
+          console.error(err)
+        })
     }
   }
-};
+}
 </script>
 <style scoped>
 @import url("https://js.arcgis.com/4.6/esri/css/main.css");

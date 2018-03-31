@@ -32,7 +32,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import Todo from './Todo.vue'
 
 const STORAGE_KEY = 'todos'
@@ -53,7 +52,7 @@ const defalutList = [
 ]
 export default {
   components: { Todo },
-  data() {
+  data () {
     return {
       visibility: 'all',
       filters,
@@ -62,21 +61,21 @@ export default {
     }
   },
   computed: {
-    allChecked() {
+    allChecked () {
       return this.todos.every(todo => todo.done)
     },
-    filteredTodos() {
+    filteredTodos () {
       return filters[this.visibility](this.todos)
     },
-    remaining() {
+    remaining () {
       return this.todos.filter(todo => !todo.done).length
     }
   },
   methods: {
-    setLocalStorgae() {
+    setLocalStorgae () {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.todos))
     },
-    addTodo(e) {
+    addTodo (e) {
       const text = e.target.value
       if (text.trim()) {
         this.todos.push({
@@ -87,23 +86,23 @@ export default {
       }
       e.target.value = ''
     },
-    toggleTodo(val) {
+    toggleTodo (val) {
       val.done = !val.done
       this.setLocalStorgae()
     },
-    deleteTodo(todo) {
+    deleteTodo (todo) {
       this.todos.splice(this.todos.indexOf(todo), 1)
       this.setLocalStorgae()
     },
-    editTodo({ todo, value }) {
+    editTodo ({ todo, value }) {
       todo.text = value
       this.setLocalStorgae()
     },
-    clearCompleted() {
+    clearCompleted () {
       this.todos = this.todos.filter(todo => !todo.done)
       this.setLocalStorgae()
     },
-    toggleAll({ done }) {
+    toggleAll ({ done }) {
       this.todos.forEach(todo => {
         todo.done = done
         this.setLocalStorgae()
