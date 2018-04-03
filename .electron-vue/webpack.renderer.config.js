@@ -14,7 +14,6 @@ const BabiliWebpackPlugin = require('babili-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const vueLoaderConfig = require('./vue-loader.conf')
 
 /**
  * List of node_modules to include in webpack bundle
@@ -66,27 +65,6 @@ let rendererConfig = {
           use: 'css-loader'
         })
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: {
-      //     loader: 'svg-sprite-loader',
-      //     options: {
-      //       symbolId: 'icon-[name]'
-      //     }
-      //   },
-      //   include: [resolve('src/renderer/icons')]
-      // },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   use: {
-      //     loader: 'url-loader',
-      //     options: {
-      //       limit: 10000,
-      //       name: utils.assetsPath('img/[name].[hash:7].[ext]')
-      //     }
-      //   },
-      //   include: [resolve('src/renderer/icons')]
-      // },
       {
         test: /\.scss$/,
         use: utils.cssLoaders("scss").scss
@@ -109,13 +87,11 @@ let rendererConfig = {
         use: {
           loader: 'vue-loader',
           options: {
-            transformToRequire: {
-              video: ['src', 'poster'],
-              source: 'src',
-              img: 'src',
-              image: 'xlink:href'
-            },
-            extractCSS: process.env.NODE_ENV === 'production'
+            extractCSS: process.env.NODE_ENV === 'production',
+            loaders: {
+              sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
+              scss: 'vue-style-loader!css-loader!sass-loader'
+            }
           }
         }
       },
