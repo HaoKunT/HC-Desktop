@@ -21,7 +21,7 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "npm run e2e",
     "unit": "karma start test/unit/karma.conf.js"
   },
   "build": {
@@ -61,7 +61,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bulma": "^0.6.2",
-    "clipboard": "1.7.1",
+    "clipboard": "^1.7.1",
     "codemirror": "5.32.0",
     "dropzone": "5.2.0",
     "echarts": "3.8.5",
