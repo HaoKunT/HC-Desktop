@@ -10,8 +10,8 @@ export default {
     arcgismap: 'ArcGIS Map',
     arcgissence: 'ArcGIS Scene',
     national: 'National',
-    multicity: 'Multi City',
-    singlecity: 'Statistics of Wuhan'
+    multicity: 'Multi City Statistics',
+    singlecity: 'Single City Statistics'
   },
   navbar: {
     logOut: 'Log Out',

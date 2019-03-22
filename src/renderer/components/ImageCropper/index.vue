@@ -103,7 +103,6 @@
 </template>
 
 <script>
- /* eslint-disable */
 'use strict'
 import request from '@/utils/request'
 import language from './utils/language.js'
@@ -191,7 +190,7 @@ export default {
       'default': false
     }
   },
-  data() {
+  data () {
     const that = this
     const {
       imgFormat,
@@ -280,7 +279,7 @@ export default {
   },
   computed: {
     // 进度条样式
-    progressStyle() {
+    progressStyle () {
       const {
         progress
       } = this
@@ -289,7 +288,7 @@ export default {
       }
     },
     // 原图样式
-    sourceImgStyle() {
+    sourceImgStyle () {
       const {
         scale,
         sourceImgMasking
@@ -309,7 +308,7 @@ export default {
       }
     },
     // 原图蒙版属性
-    sourceImgMasking() {
+    sourceImgMasking () {
       const {
         width,
         height,
@@ -342,7 +341,7 @@ export default {
       }
     },
     // 原图遮罩样式
-    sourceImgShadeStyle() {
+    sourceImgShadeStyle () {
       const {
         sourceImgMasking,
         sourceImgContainer
@@ -356,7 +355,7 @@ export default {
         height: h + 'px'
       }
     },
-    previewStyle() {
+    previewStyle () {
       const {
         width,
         height,
@@ -380,7 +379,7 @@ export default {
     }
   },
   watch: {
-    value(newValue) {
+    value (newValue) {
       if (newValue && this.loading != 1) {
         this.reset()
       }
@@ -388,11 +387,11 @@ export default {
   },
   methods: {
     // 点击波纹效果
-    ripple(e) {
+    ripple (e) {
       effectRipple(e)
     },
     // 关闭控件
-    off() {
+    off () {
       setTimeout(() => {
         this.$emit('input', false)
         this.$emit('close')
@@ -402,19 +401,19 @@ export default {
       }, 200)
     },
     // 设置步骤
-    setStep(no) {
+    setStep (no) {
       // 延时是为了显示动画效果呢，哈哈哈
       setTimeout(() => {
         this.step = no
       }, 200)
     },
     /* 图片选择区域函数绑定
-		 ---------------------------------------------------------------*/
-    preventDefault(e) {
+		 --------------------------------------------------------------- */
+    preventDefault (e) {
       e.preventDefault()
       return false
     },
-    handleClick(e) {
+    handleClick (e) {
       if (this.loading !== 1) {
         if (e.target !== this.$refs.fileinput) {
           e.preventDefault()
@@ -424,7 +423,7 @@ export default {
         }
       }
     },
-    handleChange(e) {
+    handleChange (e) {
       e.preventDefault()
       if (this.loading !== 1) {
         const files = e.target.files || e.dataTransfer.files
@@ -434,9 +433,9 @@ export default {
         }
       }
     },
-    /* ---------------------------------------------------------------*/
+    /* --------------------------------------------------------------- */
     // 检测选择的文件是否合适
-    checkFile(file) {
+    checkFile (file) {
       let that = this,
         {
           lang,
@@ -457,7 +456,7 @@ export default {
       return true
     },
     // 重置控件
-    reset() {
+    reset () {
       const that = this
       that.loading = 0
       that.hasError = false
@@ -465,17 +464,17 @@ export default {
       that.progress = 0
     },
     // 设置图片源
-    setSourceImg(file) {
+    setSourceImg (file) {
       let that = this,
         fr = new FileReader()
-      fr.onload = function(e) {
+      fr.onload = function (e) {
         that.sourceImgUrl = fr.result
         that.startCrop()
       }
       fr.readAsDataURL(file)
     },
     // 剪裁前准备工作
-    startCrop() {
+    startCrop () {
       let that = this,
         {
           width,
@@ -489,7 +488,7 @@ export default {
         sim = sourceImgMasking,
         img = new Image()
       img.src = sourceImgUrl
-      img.onload = function() {
+      img.onload = function () {
         let nWidth = img.naturalWidth,
           nHeight = img.naturalHeight,
           nRatio = nWidth / nHeight,
@@ -529,7 +528,7 @@ export default {
       }
     },
     // 鼠标按下图片准备移动
-    imgStartMove(e) {
+    imgStartMove (e) {
       e.preventDefault()
       // 支持触摸事件，则鼠标事件无效
       if (this.isSupportTouch && !e.targetTouches) {
@@ -548,7 +547,7 @@ export default {
       simd.on = true
     },
     // 鼠标按下状态下移动，图片移动
-    imgMove(e) {
+    imgMove (e) {
       e.preventDefault()
       // 支持触摸事件，则鼠标事件无效
       if (this.isSupportTouch && !e.targetTouches) {
@@ -590,17 +589,17 @@ export default {
       scale.y = rY
     },
 		 // 按钮按下开始向右旋转
-    startRotateRight(e) {
+    startRotateRight (e) {
       let that = this,
         {
           scale
         } = that
       scale.rotateRight = true
-      function rotate() {
+      function rotate () {
         if (scale.rotateRight) {
           const degree = ++scale.degree
           that.createImg(degree)
-          setTimeout(function() {
+          setTimeout(function () {
             rotate()
           }, 60)
         }
@@ -608,17 +607,17 @@ export default {
       rotate()
     },
     // 按钮按下开始向右旋转
-    startRotateLeft(e) {
+    startRotateLeft (e) {
       let that = this,
         {
           scale
         } = that
       scale.rotateLeft = true
-      function rotate() {
+      function rotate () {
         if (scale.rotateLeft) {
           const degree = --scale.degree
           that.createImg(degree)
-          setTimeout(function() {
+          setTimeout(function () {
             rotate()
           }, 60)
         }
@@ -626,7 +625,7 @@ export default {
       rotate()
     },
     // 停止旋转
-    endRotate() {
+    endRotate () {
       const {
         scale
       } = this
@@ -634,17 +633,17 @@ export default {
       scale.rotateRight = false
     },
     // 按钮按下开始放大
-    startZoomAdd(e) {
+    startZoomAdd (e) {
       let that = this,
         {
           scale
         } = that
       scale.zoomAddOn = true
-      function zoom() {
+      function zoom () {
         if (scale.zoomAddOn) {
           const range = scale.range >= 100 ? 100 : ++scale.range
           that.zoomImg(range)
-          setTimeout(function() {
+          setTimeout(function () {
             zoom()
           }, 60)
         }
@@ -652,21 +651,21 @@ export default {
       zoom()
     },
     // 按钮松开或移开取消放大
-    endZoomAdd(e) {
+    endZoomAdd (e) {
       this.scale.zoomAddOn = false
     },
     // 按钮按下开始缩小
-    startZoomSub(e) {
+    startZoomSub (e) {
       let that = this,
         {
           scale
         } = that
       scale.zoomSubOn = true
-      function zoom() {
+      function zoom () {
         if (scale.zoomSubOn) {
           const range = scale.range <= 0 ? 0 : --scale.range
           that.zoomImg(range)
-          setTimeout(function() {
+          setTimeout(function () {
             zoom()
           }, 60)
         }
@@ -674,17 +673,17 @@ export default {
       zoom()
     },
     // 按钮松开或移开取消缩小
-    endZoomSub(e) {
+    endZoomSub (e) {
       const {
         scale
       } = this
       scale.zoomSubOn = false
     },
-    zoomChange(e) {
+    zoomChange (e) {
       this.zoomImg(e.target.value)
     },
     // 缩放原图
-    zoomImg(newRange) {
+    zoomImg (newRange) {
       const that = this
       const {
         sourceImgMasking,
@@ -731,14 +730,14 @@ export default {
       scale.width = nWidth
       scale.height = nHeight
       scale.range = newRange
-      setTimeout(function() {
+      setTimeout(function () {
         if (scale.range == newRange) {
           that.createImg()
         }
       }, 300)
     },
 		 // 生成需求图片
-    createImg(e) {
+    createImg (e) {
       let that = this,
         {
           mime,
@@ -772,7 +771,7 @@ export default {
       ctx.drawImage(sourceImg, x / scale, y / scale, width / scale, height / scale)
       that.createImgUrl = canvas.toDataURL(mime)
     },
-    prepareUpload() {
+    prepareUpload () {
       const {
         url,
         createImgUrl,
@@ -787,7 +786,7 @@ export default {
       }
     },
     // 上传图片
-    upload() {
+    upload () {
       let that = this,
         {
           lang,
@@ -810,7 +809,7 @@ export default {
         })
       }
       // 监听进度回调
-      const uploadProgress = function(event) {
+      const uploadProgress = function (event) {
         if (event.lengthComputable) {
           that.progress = 100 * Math.round(event.loaded) / event.total
         }
@@ -836,7 +835,7 @@ export default {
       })
     }
   },
-  created() {
+  created () {
     // 绑定按键esc隐藏此插件事件
     document.addEventListener('keyup', (e) => {
       if (this.value && (e.key == 'Escape' || e.keyCode == 27)) {

@@ -3,6 +3,15 @@
     <div class="scroll-wrapper" ref="scrollWrapper" :style="{left: left + 'px'}">
       <slot></slot>
     </div>
+    <div class="datepicker-wraper" :style="{display: datepickerWraperDispaly}">
+      <el-date-picker style="margin-right: 0px;"
+      v-model="dateSelected"
+      type="date"
+      size="small"
+      :clearable="datepickerClearable"
+      placeholder="选择日期">
+      </el-date-picker>
+    </div>
   </div>
 </template>
 
@@ -11,13 +20,21 @@ const padding = 15 // tag's padding
 
 export default {
   name: 'scrollPane',
-  data() {
+  data () {
     return {
-      left: 0
+      left: 0,
+      datepickerClearable: false,
+      dateSelected: new Date(2017, 2, 1)
+    }
+  },
+  props: {
+    datepickerWraperDispaly: {
+      type: String,
+      default: 'none'
     }
   },
   methods: {
-    handleScroll(e) {
+    handleScroll (e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 3
       const $container = this.$refs.scrollContainer
       const $containerWidth = $container.offsetWidth
@@ -31,14 +48,17 @@ export default {
           if (this.left < -($wrapperWidth - $containerWidth + padding)) {
             this.left = this.left
           } else {
-            this.left = Math.max(this.left + eventDelta, $containerWidth - $wrapperWidth - padding)
+            this.left = Math.max(
+              this.left + eventDelta,
+              $containerWidth - $wrapperWidth - padding
+            )
           }
         } else {
           this.left = 0
         }
       }
     },
-    moveToTarget($target) {
+    moveToTarget ($target) {
       const $container = this.$refs.scrollContainer
       const $containerWidth = $container.offsetWidth
       const $targetLeft = $target.offsetLeft
@@ -47,7 +67,10 @@ export default {
       if ($targetLeft < -this.left) {
         // tag in the left
         this.left = -$targetLeft + padding
-      } else if ($targetLeft + padding > -this.left && $targetLeft + $targetWidth < -this.left + $containerWidth - padding) {
+      } else if (
+        $targetLeft + padding > -this.left &&
+        $targetLeft + $targetWidth < -this.left + $containerWidth - padding
+      ) {
         // tag in the current view
         // eslint-disable-line
       } else {
@@ -67,6 +90,13 @@ export default {
   width: 100%;
   .scroll-wrapper {
     position: absolute;
+  }
+  .datepicker-wraper {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 1px 15px;
   }
 }
 </style>

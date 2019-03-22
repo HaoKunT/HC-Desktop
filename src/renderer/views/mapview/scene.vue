@@ -17,7 +17,7 @@ export default {
   position: relative;
   padding: 20px;
   width: 100%;
-  height: 87vh;
+  height: 87.9vh;
   background-color: #eee;
   z-index:0;
 }

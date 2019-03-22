@@ -21,13 +21,13 @@ export default {
       default: 'vue'
     }
   },
-  data() {
+  data () {
     return {
       isActive: false
     }
   },
   methods: {
-    clickTitle() {
+    clickTitle () {
       this.isActive = !this.isActive
     }
   }
@@ -36,7 +36,7 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" >
 $n: 6; //和items.length 相同
-$t: .1s;
+$t: 0.1s;
 .share-dropdown-menu {
   width: 250px;
   position: relative;
@@ -52,7 +52,7 @@ $t: .1s;
     font-size: 20px;
     text-align: center;
     z-index: 2;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
   &-wrapper {
     position: relative;
@@ -87,8 +87,8 @@ $t: .1s;
     .share-dropdown-menu-item {
       @for $i from 1 through $n {
         &:nth-of-type(#{$i}) {
-         transition-delay: ($n - $i)*$t;
-          transform: translate3d(0, ($i - 1)*60px, 0);
+          transition-delay: ($n - $i)*$t;
+          transform: translate3d(0,  ($i - 1)*60px, 0);
         }
       }
     }

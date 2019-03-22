@@ -10,8 +10,8 @@ export default {
     arcgismap: 'ArcGIS Map',
     arcgissence: 'ArcGIS Scene',
     national: '全国范围',
-    multicity: '多城市数据对比',
-    singlecity: '武汉市数据统计'
+    multicity: '多个城市数据对比',
+    singlecity: '单个城市数据统计'
   },
   navbar: {
     logOut: '退出登录',

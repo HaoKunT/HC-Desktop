@@ -11,14 +11,13 @@
 </template>
 
 <script>
-/* eslint-disable */
 import key from '@/components/Charts/keyboard'
 
 // import scatter3D from '@/components/Charts/national/scatter3D'
 
 export default {
   name: 'keyboardChart',
-  components: { key}
+  components: { key }
 }
 </script>
 

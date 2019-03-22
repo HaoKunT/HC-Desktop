@@ -27,14 +27,13 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { mapGetters } from 'vuex'
 import PanThumb from '@/components/PanThumb'
 import Mallki from '@/components/TextHoverEffect/Mallki'
 
 export default {
   components: { PanThumb, Mallki },
-  data() {
+  data () {
     return {
       statisticsData: {
         article_count: 1024,
@@ -50,7 +49,7 @@ export default {
     ])
   },
   filters: {
-    statusFilter(status) {
+    statusFilter (status) {
       const statusMap = {
         success: 'success',
         pending: 'danger'
