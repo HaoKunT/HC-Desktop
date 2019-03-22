@@ -20,6 +20,10 @@
 import * as esriLoader from 'esri-loader'
 import { getDailyNationalData } from '@/api/data/main'
 
+const options = {
+        url: 'https://js.arcgis.com/4.6/'
+      }
+
 export default {
   data () {
     return {
@@ -53,16 +57,16 @@ export default {
     initMap () {
       esriLoader
         .loadModules([
-          'esri/views/MapView',
-          'esri/WebMap',
-          'esri/widgets/Search',
-          'esri/widgets/Locate',
-          'esri/widgets/Expand',
-          'esri/widgets/BasemapGallery',
-          'esri/widgets/Fullscreen',
-          'esri/Graphic',
-          'dojo/domReady!'
-        ])
+          "esri/views/MapView",
+          "esri/WebMap",
+          "esri/widgets/Search",
+          "esri/widgets/Locate",
+          "esri/widgets/Expand",
+          "esri/widgets/BasemapGallery",
+          "esri/widgets/Fullscreen",
+          "esri/Graphic",
+          "dojo/domReady!"
+        ], options)
         .then(
           ([
             MapView,
@@ -137,7 +141,7 @@ export default {
     },
     addPoints (data) {
       esriLoader
-        .loadModules(['esri/Graphic', 'dojo/domReady!'])
+        .loadModules(["esri/Graphic", "dojo/domReady!"], options)
         .then(([Graphic]) => {
           this.fullscreenLoading = true
           var pointGraphics = []

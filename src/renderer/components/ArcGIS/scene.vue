@@ -22,6 +22,10 @@
 import * as esriLoader from 'esri-loader'
 import { getDailyNationalData } from '@/api/data/main'
 
+const options = {
+        url: 'https://js.arcgis.com/4.6/'
+      }
+
 export default {
   data () {
     return {
@@ -55,17 +59,17 @@ export default {
     initMap () {
       esriLoader
         .loadModules([
-          'esri/views/SceneView',
-          'esri/Map',
-          'esri/Graphic',
-          'esri/layers/GraphicsLayer',
-          'esri/widgets/Search',
-          'esri/widgets/Locate',
-          'esri/widgets/Expand',
-          'esri/widgets/BasemapGallery',
-          'esri/widgets/Fullscreen',
-          'dojo/domReady!'
-        ])
+          "esri/views/SceneView",
+          "esri/Map",
+          "esri/Graphic",
+          "esri/layers/GraphicsLayer",
+          "esri/widgets/Search",
+          "esri/widgets/Locate",
+          "esri/widgets/Expand",
+          "esri/widgets/BasemapGallery",
+          "esri/widgets/Fullscreen",
+          "dojo/domReady!"
+        ], options)
         .then(
           ([
             SceneView,
